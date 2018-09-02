@@ -1,0 +1,32 @@
+* JMH
+cd ~/IdeaProjects/assignment-benchmark2
+java -jar target/benchmarks.jar
+
+*
+Without intern() :
+Heap:
+char[]	1,632,334 (33.2%)	239,440,732 B (67.7%)	n/a
+
+CPU
+QueryFileReader.feedRecordFromCsvLine ()	2,163 ms (20.4%)	2,163 ms (20.4%)
+
+With intern() :
+Heap:
+char[]	582,391 (20.7%)	127,680,586 B (60.1%)	n/a
+
+CPU
+QueryFileReader.feedRecordFromCsvLine ()	3,835 ms (3.3%)	3,835 ms (3.3%)
+
+
+--------------------------------------------------------------------
+Benchmark                           Mode  Cnt  Score   Error  Units
+QueriesBenchmark.loadQueries        avgt   10  2.844 ± 0.056   s/op
+QueriesBenchmark.distinctBenchmark  avgt   10  0.254 ± 0.008   s/op
+QueriesBenchmark.popularBenchmark   avgt   10  0.333 ± 0.016   s/op
+
+8ffe35b
+
+Benchmark                           Mode  Cnt  Score   Error  Units
+QueriesBenchmark._loadQueries       avgt   10  2.884 ± 0.093   s/op
+QueriesBenchmark.distinctBenchmark  avgt   10  0.264 ± 0.013   s/op
+QueriesBenchmark.popularBenchmark   avgt   10  0.378 ± 0.045   s/op

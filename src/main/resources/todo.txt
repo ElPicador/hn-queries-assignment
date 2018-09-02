@@ -1,0 +1,16 @@
+- logger
+
+* Scalability:
+-- compute max provisioning
+-- How to compute 'popular' request over a collection of files?
+--
+
+Test URLs
+curl 'http://localhost:8080/1/queries/popular/2015?size=99999999'
+curl 'http://localhost:8080/1/queries/popular/2019?size=99999999'
+
+* Perspectives
+- Reduce size of indexing structure.
+-- use array for duplicate queries by time -> not worth it?
+-- compress dates: use int instead.
+-- externalize date and texts -> ?

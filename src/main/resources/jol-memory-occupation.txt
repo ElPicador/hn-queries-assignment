@@ -1,0 +1,54 @@
+--------------------------------------------------------------------------------------
+* Date as long
+Query	1,623,420 	51,949,440 B
+=> 32 B / instance
+=> ~215 MB for the whole index
+
+Query object internals:
+ OFFSET  SIZE               TYPE DESCRIPTION                               VALUE
+      0    12                    (object header)                           N/A
+     12     4   java.lang.String Query.text                                N/A
+     16     8               long Query.date                                N/A
+Instance size: 24 bytes
+Space losses: 0 bytes internal + 0 bytes external = 0 bytes total
+--------------------------------------------------------------------------------------
+* Date as LocalDateTime
+=> ~512 MB for the whole index
+Query object internals:
+ OFFSET  SIZE                      TYPE DESCRIPTION                               VALUE
+      0    12                           (object header)                           N/A
+     12     4   java.time.LocalDateTime Query.date                                N/A
+     16     4          java.lang.String Query.text                                N/A
+     20     4                           (loss due to the next object alignment)
+Instance size: 24 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+java.time.LocalDateTime object internals:
+ OFFSET  SIZE                  TYPE DESCRIPTION                               VALUE
+      0    12                       (object header)                           N/A
+     12     4   java.time.LocalDate LocalDateTime.date                        N/A
+     16     4   java.time.LocalTime LocalDateTime.time                        N/A
+     20     4                       (loss due to the next object alignment)
+Instance size: 24 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+java.time.LocalDate object internals:
+ OFFSET  SIZE    TYPE DESCRIPTION                               VALUE
+      0    12         (object header)                           N/A
+     12     4     int LocalDate.year                            N/A
+     16     2   short LocalDate.month                           N/A
+     18     2   short LocalDate.day                             N/A
+     20     4         (loss due to the next object alignment)
+Instance size: 24 bytes
+Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+java.time.LocalTime object internals:
+ OFFSET  SIZE   TYPE DESCRIPTION                               VALUE
+      0    12        (object header)                           N/A
+     12     4    int LocalTime.nano                            N/A
+     16     1   byte LocalTime.hour                            N/A
+     17     1   byte LocalTime.minute                          N/A
+     18     1   byte LocalTime.second                          N/A
+     19     5        (loss due to the next object alignment)
+Instance size: 24 bytes
+Space losses: 0 bytes internal + 5 bytes external = 5 bytes total

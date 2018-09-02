@@ -1,0 +1,13 @@
+hn.tsv
+  1_623_420 lines
+
+  507_945 unique lines
+
+* average nb occurrences of distinct texts
+popular.stream().collect(Collectors.averagingInt(q -> q.getCount()));
+2.2499023317296114
+
+---
+After init:
+Query	1,623,420 (57.6%)	51,949,440 B (24.4%)	n/a
+
