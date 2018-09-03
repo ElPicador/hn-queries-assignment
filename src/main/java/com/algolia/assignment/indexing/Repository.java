@@ -3,12 +3,14 @@ package com.algolia.assignment.indexing;
 import com.algolia.assignment.model.Query;
 import com.algolia.assignment.model.QueryCount;
 import com.algolia.assignment.model.TimeRange;
+import com.algolia.assignment.model.util.MutableInt;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,25 +50,27 @@ public final class Repository {
      */
     public List<QueryCount> getPopularQueries(TimeRange range, int top) {
         Stream<Query> slice = sliceRange(range);
-        Map<String, Long> countsByText = getCountsByText(slice);
+        Map<String, MutableInt> countsByText = getCountsByText(slice);
 
         return sortTopK(top, countsByText);
     }
 
-    private Map<String, Long> getCountsByText(Stream<Query> slice) {
-
-
-        return slice.collect(Collectors.groupingBy(Query::getText, Collectors.counting()));
+    private Map<String, MutableInt> getCountsByText(Stream<Query> slice) {
+        // We use ConcurrentHashMap for its performance, not for its concurrency features.
+        Map<String, MutableInt> countsByText = new ConcurrentHashMap<>();
+        slice.forEach(q -> countsByText.computeIfAbsent(q.getText(), x -> new MutableInt()).
+                increment());
+        return countsByText;
     }
 
     /**
      * Since we probably want to sort a small fraction of the result,
      * it makes sense to use a priority queue.
      */
-    private List<QueryCount> sortTopK(int top, Map<String, Long> countsByText) {
+    private List<QueryCount> sortTopK(int top, Map<String, MutableInt> countsByText) {
 
         Queue<QueryCount> queue = new PriorityQueue<>(countsByText.entrySet().size(), QueryCount.getCountComparator());
-        for (Map.Entry<String, Long> entry : countsByText.entrySet()) {
+        for (Map.Entry<String, MutableInt> entry : countsByText.entrySet()) {
             queue.add(new QueryCount(entry.getKey(), entry.getValue().intValue()));
         }
 
@@ -82,7 +86,9 @@ public final class Repository {
      */
     public long getDistinctQueriesCount(TimeRange range) {
         Stream<Query> slice = sliceRange(range);
-        return slice.map(Query::getText).distinct().count();
+        Set<String> uniqueTexts = new HashSet<>();
+        slice.forEach(q -> uniqueTexts.add(q.getText()));
+        return uniqueTexts.size();
     }
 
     private Stream<Query> sliceRange(TimeRange range) {
