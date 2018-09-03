@@ -1,5 +1,3 @@
-- logger
-
 * Scalability:
 -- compute max provisioning
 -- How to compute 'popular' request over a collection of files?
