@@ -16,7 +16,7 @@ public final class RestServer {
 
     public static void setupServer(Repository repository) {
 
-        /* The whole configuration is made through static methods.
+        /* The whole REST infrastructure is configured through static methods.
          * Although this might not be to everyone's taste,
          * it is Spark's author opinion that statics are better than dependency injection
          * when dealing with web applications / controllers.

@@ -12,25 +12,24 @@ import java.util.List;
 
 public final class RepositoryTest {
 
-
-    private static Query query(String dateTime, String text) {
+    private static Query createQuery(String dateTime, String text) {
         return new Query(dateTime, text);
     }
 
     private Repository feedQueries() {
         List<Query> queries = Arrays.asList(
-                query("2015-08-02 23:59:59", "A"),
+                createQuery("2015-08-02 23:59:59", "A"),
                 //
-                query("2015-08-03 00:00:00", "B"),
-                query("2015-08-03 00:00:00", "B"),
-                query("2015-08-03 00:00:00", "C"),
-                query("2015-08-03 00:00:01", "C"),
-                query("2015-08-03 00:00:59", "C"),
+                createQuery("2015-08-03 00:00:00", "B"),
+                createQuery("2015-08-03 00:00:00", "B"),
+                createQuery("2015-08-03 00:00:00", "C"),
+                createQuery("2015-08-03 00:00:01", "C"),
+                createQuery("2015-08-03 00:00:59", "C"),
                 //
-                query("2015-08-04 00:01:00", "D"),
-                query("2015-08-04 00:02:00", "D"),
-                query("2015-08-04 00:03:00", "D"),
-                query("2015-08-04 00:04:00", "D"));
+                createQuery("2015-08-04 00:01:00", "D"),
+                createQuery("2015-08-04 00:02:00", "D"),
+                createQuery("2015-08-04 00:03:00", "D"),
+                createQuery("2015-08-04 00:04:00", "D"));
         Collections.shuffle(queries);
         return Repository.fromStream(queries.stream());
     }

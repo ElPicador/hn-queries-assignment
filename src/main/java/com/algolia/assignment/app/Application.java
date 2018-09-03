@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 final class Application {
 
     /**
-     * The main entry point into the application.
+     * The entry point into the application.
      *
      * @param args the location of the data file. ex: /home/mary/hn.tsv
      */
@@ -25,7 +25,7 @@ final class Application {
          * at the expense of a few seconds' startup.
          */
         String path = args[0];
-        Repository repository = QueryFileReader.feedQueriesFromFile(Paths.get(path));
+        Repository repository = QueryFileReader.TSV.feedQueriesFromFile(Paths.get(path));
         setupServer(repository);
     }
 

@@ -31,15 +31,16 @@ public final class Repository {
     }
 
     /**
-     * Feeds this index from a stream.
+     * Factory method: creates a new instance,
+     * feeding its underlying array index from a stream.
      */
     public static Repository fromStream(Stream<Query> stream) {
         long start = System.currentTimeMillis();
         ArrayList<Query> queries = stream.sorted(DATE_COMPARATOR).collect(Collectors.toCollection(ArrayList::new));
-        Repository repository = new Repository(queries);
         long end = System.currentTimeMillis();
         LOGGER.info("Indexed queries in {} ms.", end - start);
-        return repository;
+
+        return new Repository(queries);
     }
 
     /**
@@ -59,8 +60,8 @@ public final class Repository {
     }
 
     /**
-     * Since we only want a small fraction of the result sorted,
-     * it is cheaper to use a priority queue.
+     * Since we probably want to sort a small fraction of the result,
+     * it makes sense to use a priority queue.
      */
     private List<QueryCount> sortTopK(int top, Map<String, Long> countsByText) {
 
