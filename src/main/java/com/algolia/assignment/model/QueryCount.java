@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 /**
- * A simple data class grouping the text of a query
+ * A simple value class grouping the text of a query
  * with the count of its occurrences.
  */
 @Immutable
