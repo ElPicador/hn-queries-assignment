@@ -1,7 +1,17 @@
-hn.tsv
-  1_623_420 lines
+* hn.tsv
 
-  507_945 unique lines
+[~/hn]% cut -f 2 hn.tsv > texts
+[~/hn]% wc -l texts
+1623420 texts
+[~/hn]% sort texts > texts.sorted
+[~/hn]% cut -f 2 hn > texts
+[~/hn]% uniq -u texts.sorted > texts.sorted.unique
+[~/hn]% wc -l texts.sorted.unique
+507945 texts.sorted.unique
+
+=>  1_623_420 lines
+=>  507_945 unique lines
+=> Each text occurs 3.2 times, on average.
 
 * average nb occurrences of distinct texts
 popular.stream().collect(Collectors.averagingInt(q -> q.getCount()));

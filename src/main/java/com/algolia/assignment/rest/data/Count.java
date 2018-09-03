@@ -1,4 +1,4 @@
-package com.algolia.assignment.rest.dao;
+package com.algolia.assignment.rest.data;
 
 import jdk.nashorn.internal.ir.annotations.Immutable;
 

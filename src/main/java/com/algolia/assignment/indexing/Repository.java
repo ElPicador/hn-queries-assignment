@@ -3,8 +3,9 @@ package com.algolia.assignment.indexing;
 import com.algolia.assignment.model.Query;
 import com.algolia.assignment.model.QueryCount;
 import com.algolia.assignment.model.TimeRange;
-import com.algolia.assignment.todo.AppLogger;
 import jdk.nashorn.internal.ir.annotations.Immutable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -18,10 +19,12 @@ import java.util.stream.Stream;
 @Immutable
 public final class Repository {
     private static final Comparator<Query> DATE_COMPARATOR = Query.getDateComparator();
+    private static final Logger LOGGER = LoggerFactory.getLogger(Repository.class);
     /**
      * The list of queries, indexed by date.
      */
     private final ArrayList<Query> queries;
+
 
     private Repository(ArrayList<Query> list) {
         this.queries = list;
@@ -35,7 +38,7 @@ public final class Repository {
         ArrayList<Query> queries = stream.sorted(DATE_COMPARATOR).collect(Collectors.toCollection(ArrayList::new));
         Repository repository = new Repository(queries);
         long end = System.currentTimeMillis();
-        AppLogger.log(String.format("Indexed queries in %d ms.", end - start));
+        LOGGER.info("Indexed queries in {} ms.", end - start);
         return repository;
     }
 
@@ -44,9 +47,15 @@ public final class Repository {
      */
     public List<QueryCount> getPopularQueries(TimeRange range, int top) {
         Stream<Query> slice = sliceRange(range);
-        Map<String, Long> countsByText = slice.collect(Collectors.groupingBy(Query::getText, Collectors.counting()));
+        Map<String, Long> countsByText = getCountsByText(slice);
 
         return sortTopK(top, countsByText);
+    }
+
+    private Map<String, Long> getCountsByText(Stream<Query> slice) {
+
+
+        return slice.collect(Collectors.groupingBy(Query::getText, Collectors.counting()));
     }
 
     /**

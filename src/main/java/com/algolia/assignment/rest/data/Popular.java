@@ -1,4 +1,4 @@
-package com.algolia.assignment.rest.dao;
+package com.algolia.assignment.rest.data;
 
 import com.algolia.assignment.model.QueryCount;
 import jdk.nashorn.internal.ir.annotations.Immutable;
