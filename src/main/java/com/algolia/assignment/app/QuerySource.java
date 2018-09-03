@@ -11,10 +11,11 @@ import java.util.stream.Stream;
 /**
  * This class initializes a queries repository from a file.
  */
-enum QueryFileReader {
+enum QuerySource {
 
-     TSV{
+     TSV_FILE {
          private static final String TAB = "\t";
+
          final Query feedRecordFromLine(String line) {
              String[] cols = line.split(TAB);
              String dateTime = cols[0];
@@ -29,7 +30,7 @@ enum QueryFileReader {
          }};
 
 
-    Repository feedQueriesFromFile(Path path) throws IOException {
+    Repository feedRepositoryFromFile(Path path) throws IOException {
         try (Stream<String> lines = Files.lines(path)) {
             Stream<Query> queryStream = lines.map(this::feedRecordFromLine);
 

@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class RepositoryTest {
+public final class RepositoryMocked {
 
     private static Query createQuery(String dateTime, String text) {
         return new Query(dateTime, text);

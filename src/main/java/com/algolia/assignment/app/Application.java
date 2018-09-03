@@ -25,7 +25,7 @@ final class Application {
          * at the expense of a few seconds' startup.
          */
         String path = args[0];
-        Repository repository = QueryFileReader.TSV.feedQueriesFromFile(Paths.get(path));
+        Repository repository = QuerySource.TSV_FILE.feedRepositoryFromFile(Paths.get(path));
         setupServer(repository);
     }
 

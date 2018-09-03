@@ -15,7 +15,7 @@ import java.util.List;
 public final class RepositoryHN {
 
     private static Repository loadQueries() throws IOException {
-        return QueryFileReader.TSV.feedQueriesFromFile(TestFiles.GLOBAL_FILE_PATH);
+        return QuerySource.TSV_FILE.feedRepositoryFromFile(TestFiles.GLOBAL_FILE_PATH);
     }
 
     @Test
