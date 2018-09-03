@@ -23,13 +23,13 @@ public final class Repository {
     private static final Comparator<Query> DATE_COMPARATOR = Query.getDateComparator();
     private static final Logger LOGGER = LoggerFactory.getLogger(Repository.class);
     /**
-     * The list of queries, indexed by date.
+     * The list of indexedQueries, indexed by date.
      */
-    private final ArrayList<Query> queries;
+    private final ArrayList<Query> indexedQueries;
 
 
     private Repository(ArrayList<Query> list) {
-        this.queries = list;
+        this.indexedQueries = list;
     }
 
     /**
@@ -40,25 +40,25 @@ public final class Repository {
         long start = System.currentTimeMillis();
         ArrayList<Query> queries = stream.sorted(DATE_COMPARATOR).collect(Collectors.toCollection(ArrayList::new));
         long end = System.currentTimeMillis();
-        LOGGER.info("Indexed queries in {} ms.", end - start);
+        LOGGER.info("Indexed indexedQueries in {} ms.", end - start);
 
         return new Repository(queries);
     }
 
     /**
-     * Returns the top-n most popular queries in a time range.
+     * Returns the top-n most popular indexedQueries in a time range.
      */
     public List<QueryCount> getPopularQueries(TimeRange range, int top) {
-        Stream<Query> slice = sliceRange(range);
-        Map<String, MutableInt> countsByText = getCountsByText(slice);
+        List<Query> interval = restrictToRange(range);
+        Map<String, MutableInt> countsByText = getCountsByText(interval);
 
         return sortTopK(top, countsByText);
     }
 
-    private Map<String, MutableInt> getCountsByText(Stream<Query> slice) {
+    private Map<String, MutableInt> getCountsByText(List<Query> queries) {
         // We use ConcurrentHashMap for its performance, not for its concurrency features.
-        Map<String, MutableInt> countsByText = new ConcurrentHashMap<>();
-        slice.forEach(q -> countsByText.computeIfAbsent(q.getText(), x -> new MutableInt()).
+        Map<String, MutableInt> countsByText = new ConcurrentHashMap<>(queries.size());
+        queries.forEach(q -> countsByText.computeIfAbsent(q.getText(), x -> new MutableInt()).
                 increment());
         return countsByText;
     }
@@ -82,19 +82,19 @@ public final class Repository {
     }
 
     /**
-     * Returns the number of queries in a time range.
+     * Returns the number of indexedQueries in a time range.
      */
     public long getDistinctQueriesCount(TimeRange range) {
-        Stream<Query> slice = sliceRange(range);
-        Set<String> uniqueTexts = new HashSet<>();
-        slice.forEach(q -> uniqueTexts.add(q.getText()));
+        List<Query> queries = restrictToRange(range);
+        Set<String> uniqueTexts = new HashSet<>(queries.size());
+        queries.forEach(q -> uniqueTexts.add(q.getText()));
         return uniqueTexts.size();
     }
 
-    private Stream<Query> sliceRange(TimeRange range) {
+    private List<Query> restrictToRange(TimeRange range) {
         int startIndex = positionAtFirstQueryWithDate(range.getStart());
         int endIndex = positionAtFirstQueryWithDate(range.getEnd());
-        return queries.stream().skip(startIndex).limit(endIndex - startIndex);
+        return indexedQueries.subList(startIndex, endIndex);
     }
 
     private int positionAtFirstQueryWithDate(LocalDateTime target) {
@@ -104,9 +104,9 @@ public final class Repository {
 
         // We have located an entry at the right time, but it may be non-unique.
         // => we need to rewind to the first entry at this time.
-        Query current = queries.get(pos);
+        Query current = indexedQueries.get(pos);
         while (pos > 0) {
-            Query previous = queries.get(pos - 1);
+            Query previous = indexedQueries.get(pos - 1);
             if (previous.compareDateTo(current) < 0)
                 break;
             pos--;
@@ -120,11 +120,11 @@ public final class Repository {
      */
     private int binarySearch(LocalDateTime targetDate) {
         int low = 0;
-        int high = queries.size() - 1;
+        int high = indexedQueries.size() - 1;
 
         while (low <= high) {
             int mid = (low + high) >>> 1;
-            int cmp = queries.get(mid).compareDateTo(targetDate);
+            int cmp = indexedQueries.get(mid).compareDateTo(targetDate);
             if (cmp < 0)
                 low = mid + 1;
             else if (cmp > 0)
@@ -137,11 +137,11 @@ public final class Repository {
 
     @Override
     public String toString() {
-        int size = queries.size();
+        int size = indexedQueries.size();
         String s = "Repository{" +
                 "size=" + size;
         if (size < 10)
-            s += ", queries=" + queries;
+            s += ", indexedQueries=" + indexedQueries;
         return s + '}';
     }
 }

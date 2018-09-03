@@ -1,7 +1,7 @@
 # JMH version: 1.21
 # VM version: JDK 1.8.0_181, OpenJDK 64-Bit Server VM, 25.181-b13
 # VM invoker: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
-# VM options: -Dvisualvm.id=201097324268677 -javaagent:/media/data/binaries/linux-64/JTools/idea-IC-182.3911.36/lib/idea_rt.jar=44505:/media/data/binaries/linux-64/JTools/idea-IC-182.3911.36/bin -Dfile.encoding=UTF-8
+# VM options: -Dvisualvm.id=202426843235703 -javaagent:/media/data/binaries/linux-64/JTools/idea-IC-182.3911.36/lib/idea_rt.jar=33711:/media/data/binaries/linux-64/JTools/idea-IC-182.3911.36/bin -Dfile.encoding=UTF-8
 # Warmup: 1 iterations, 1 s each
 # Measurement: 10 iterations, 1 s each
 # Timeout: 10 min per iteration
@@ -11,54 +11,54 @@
 
 # Run progress: 0.00% complete, ETA 00:00:22
 # Fork: 1 of 1
-# Warmup Iteration   1: 0.330 s/op
-Iteration   1: 0.157 s/op
-                 Max memory heap: 925892608.000 bytes
+# Warmup Iteration   1: 0.353 s/op
+Iteration   1: 0.122 s/op
+                 Max memory heap: 921698304.000 bytes
 
-Iteration   2: 0.159 s/op
-                 Max memory heap: 925892608.000 bytes
+Iteration   2: 0.129 s/op
+                 Max memory heap: 921698304.000 bytes
 
-Iteration   3: 0.172 s/op
-                 Max memory heap: 923795456.000 bytes
+Iteration   3: 0.138 s/op
+                 Max memory heap: 915931136.000 bytes
 
-Iteration   4: 0.158 s/op
-                 Max memory heap: 923795456.000 bytes
+Iteration   4: 0.131 s/op
+                 Max memory heap: 915931136.000 bytes
 
-Iteration   5: 0.159 s/op
-                 Max memory heap: 923795456.000 bytes
+Iteration   5: 0.137 s/op
+                 Max memory heap: 886571008.000 bytes
 
-Iteration   6: 0.169 s/op
-                 Max memory heap: 925892608.000 bytes
+Iteration   6: 0.125 s/op
+                 Max memory heap: 886571008.000 bytes
 
-Iteration   7: 0.157 s/op
-                 Max memory heap: 925892608.000 bytes
+Iteration   7: 0.136 s/op
+                 Max memory heap: 922746880.000 bytes
 
-Iteration   8: 0.160 s/op
-                 Max memory heap: 925892608.000 bytes
+Iteration   8: 0.134 s/op
+                 Max memory heap: 922746880.000 bytes
 
-Iteration   9: 0.175 s/op
-                 Max memory heap: 927989760.000 bytes
+Iteration   9: 0.135 s/op
+                 Max memory heap: 922746880.000 bytes
 
-Iteration  10: 0.163 s/op
-                 Max memory heap: 927989760.000 bytes
+Iteration  10: 0.142 s/op
+                 Max memory heap: 918552576.000 bytes
 
 
 
 Result "com.algolia.assignment.app.QueriesBenchmark.distinctBenchmark":
-  0.163 ±(99.9%) 0.010 s/op [Average]
-  (min, avg, max) = (0.157, 0.163, 0.175), stdev = 0.007
-  CI (99.9%): [0.153, 0.173] (assumes normal distribution)
+  0.133 ±(99.9%) 0.009 s/op [Average]
+  (min, avg, max) = (0.122, 0.133, 0.142), stdev = 0.006
+  CI (99.9%): [0.124, 0.142] (assumes normal distribution)
 
 Secondary result "com.algolia.assignment.app.QueriesBenchmark.distinctBenchmark:Max memory heap":
-  927989760.000 ±(99.9%) 0.001 bytes [Maximum]
-  (min, avg, max) = (923795456.000, 925682892.800, 927989760.000), stdev = 1547414.615
-  CI (99.9%): [927989760.000, 927989760.000] (assumes normal distribution)
+  922746880.000 ±(99.9%) 0.001 bytes [Maximum]
+  (min, avg, max) = (886571008.000, 913519411.200, 922746880.000), stdev = 14447704.805
+  CI (99.9%): [922746880.000, 922746880.000] (assumes normal distribution)
 
 
 # JMH version: 1.21
 # VM version: JDK 1.8.0_181, OpenJDK 64-Bit Server VM, 25.181-b13
 # VM invoker: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
-# VM options: -Dvisualvm.id=201097324268677 -javaagent:/media/data/binaries/linux-64/JTools/idea-IC-182.3911.36/lib/idea_rt.jar=44505:/media/data/binaries/linux-64/JTools/idea-IC-182.3911.36/bin -Dfile.encoding=UTF-8
+# VM options: -Dvisualvm.id=202426843235703 -javaagent:/media/data/binaries/linux-64/JTools/idea-IC-182.3911.36/lib/idea_rt.jar=33711:/media/data/binaries/linux-64/JTools/idea-IC-182.3911.36/bin -Dfile.encoding=UTF-8
 # Warmup: 1 iterations, 1 s each
 # Measurement: 10 iterations, 1 s each
 # Timeout: 10 min per iteration
@@ -68,48 +68,48 @@ Secondary result "com.algolia.assignment.app.QueriesBenchmark.distinctBenchmark:
 
 # Run progress: 50.00% complete, ETA 00:00:16
 # Fork: 1 of 1
-# Warmup Iteration   1: 0.667 s/op
-Iteration   1: 0.310 s/op
-                 Max memory heap: 932708352.000 bytes
+# Warmup Iteration   1: 1.274 s/op
+Iteration   1: 0.330 s/op
+                 Max memory heap: 910688256.000 bytes
 
-Iteration   2: 0.335 s/op
-                 Max memory heap: 925892608.000 bytes
+Iteration   2: 0.356 s/op
+                 Max memory heap: 879755264.000 bytes
 
-Iteration   3: 0.312 s/op
-                 Max memory heap: 925892608.000 bytes
+Iteration   3: 0.323 s/op
+                 Max memory heap: 879755264.000 bytes
 
-Iteration   4: 0.320 s/op
-                 Max memory heap: 930611200.000 bytes
+Iteration   4: 0.387 s/op
+                 Max memory heap: 781713408.000 bytes
 
-Iteration   5: 0.308 s/op
-                 Max memory heap: 930611200.000 bytes
+Iteration   5: 0.365 s/op
+                 Max memory heap: 781713408.000 bytes
 
-Iteration   6: 0.321 s/op
-                 Max memory heap: 935854080.000 bytes
+Iteration   6: 0.345 s/op
+                 Max memory heap: 898105344.000 bytes
 
-Iteration   7: 0.310 s/op
-                 Max memory heap: 935854080.000 bytes
+Iteration   7: 0.330 s/op
+                 Max memory heap: 830996480.000 bytes
 
-Iteration   8: 0.325 s/op
-                 Max memory heap: 910163968.000 bytes
+Iteration   8: 0.292 s/op
+                 Max memory heap: 830996480.000 bytes
 
-Iteration   9: 0.318 s/op
-                 Max memory heap: 926941184.000 bytes
+Iteration   9: 0.310 s/op
+                 Max memory heap: 900726784.000 bytes
 
-Iteration  10: 0.310 s/op
-                 Max memory heap: 926941184.000 bytes
+Iteration  10: 0.318 s/op
+                 Max memory heap: 893911040.000 bytes
 
 
 
 Result "com.algolia.assignment.app.QueriesBenchmark.popularBenchmark":
-  0.317 ±(99.9%) 0.013 s/op [Average]
-  (min, avg, max) = (0.308, 0.317, 0.335), stdev = 0.009
-  CI (99.9%): [0.304, 0.330] (assumes normal distribution)
+  0.336 ±(99.9%) 0.043 s/op [Average]
+  (min, avg, max) = (0.292, 0.336, 0.387), stdev = 0.028
+  CI (99.9%): [0.293, 0.378] (assumes normal distribution)
 
 Secondary result "com.algolia.assignment.app.QueriesBenchmark.popularBenchmark:Max memory heap":
-  935854080.000 ±(99.9%) 0.001 bytes [Maximum]
-  (min, avg, max) = (910163968.000, 928147046.400, 935854080.000), stdev = 7365163.124
-  CI (99.9%): [935854080.000, 935854080.000] (assumes normal distribution)
+  910688256.000 ±(99.9%) 0.001 bytes [Maximum]
+  (min, avg, max) = (781713408.000, 858836172.800, 910688256.000), stdev = 48918221.326
+  CI (99.9%): [910688256.000, 910688256.000] (assumes normal distribution)
 
 
 # Run complete. Total time: 00:00:34
@@ -121,7 +121,7 @@ the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from th
 Do not assume the numbers tell you what you want them to tell.
 
 Benchmark                                           Mode  Cnt          Score   Error  Units
-QueriesBenchmark.distinctBenchmark                  avgt   10          0.163 ± 0.010   s/op
-QueriesBenchmark.distinctBenchmark:Max memory heap  avgt   10  927989760.000          bytes
-QueriesBenchmark.popularBenchmark                   avgt   10          0.317 ± 0.013   s/op
-QueriesBenchmark.popularBenchmark:Max memory heap   avgt   10  935854080.000          bytes
+QueriesBenchmark.distinctBenchmark                  avgt   10          0.133 ± 0.009   s/op
+QueriesBenchmark.distinctBenchmark:Max memory heap  avgt   10  922746880.000          bytes
+QueriesBenchmark.popularBenchmark                   avgt   10          0.336 ± 0.043   s/op
+QueriesBenchmark.popularBenchmark:Max memory heap   avgt   10  910688256.000          bytes
