@@ -17,7 +17,7 @@ public final class RepositoryMocked {
     private static final CharSequence TAB = "\t";
 
     private static Query createQuery(String dateTime, String text) {
-        return QuerySource.TSV_FILE.feedRecordFromLine(String.join(TAB, dateTime, text));
+        return QuerySource.feedRecordFromFields( dateTime, text);
     }
 
     private Repository feedQueries() {
@@ -77,8 +77,8 @@ public final class RepositoryMocked {
         );
         checkPopular("2015-08", 4, queryCounts, queries);
         checkPopular("2015-08", Integer.MAX_VALUE, queryCounts, queries);
-        checkPopular("2015-08", 0, Collections.EMPTY_LIST, queries);
-        checkPopular("2015-08", -1, Collections.EMPTY_LIST, queries);
+        checkPopular("2015-08", 0, Collections.emptyList(), queries);
+        checkPopular("2015-08", -1, Collections.emptyList(), queries);
 
         checkPopular("2015-08-02", 1, Collections.singletonList(new QueryCount("A", 1)), queries);
         checkPopular("2015-08-03", 1, Collections.singletonList(new QueryCount("C", 3)), queries);
