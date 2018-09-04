@@ -6,6 +6,7 @@ import com.algolia.assignment.model.QueryCount;
 import com.algolia.assignment.model.TimeRange;
 import org.junit.Assert;
 
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -42,10 +43,24 @@ public final class RepositoryMocked {
         checkDistinct("2015-08-03 00:00", 2, queries);
         checkDistinct("2015-08-03 00:00:00", 2, queries);
         checkDistinct("2015-08-03 00:00:01", 1, queries);
-        //
+
         checkDistinct("2015-08-04", 1, queries);
         checkDistinct("2015-08-04 00", 1, queries);
         checkDistinct("2015-08-04 00:02", 1, queries);
+
+        // 1st entry
+        checkDistinct("2015-08-02 23:59:59", 1, queries);
+        // last entry
+        checkDistinct("2015-08-04 00:04:00", 1, queries);
+        // no entry
+        checkDistinct("0010-08-02 00:00:00", 0, queries);
+        // invalid entry
+        try {
+            checkDistinct("2015-08-xx", 0, queries);
+            Assert.fail();
+        } catch (DateTimeParseException exception) {
+            // This is the expected behavior
+        }
     }
 
     @org.junit.Test
@@ -58,7 +73,15 @@ public final class RepositoryMocked {
                 new QueryCount("A", 1)
         );
         checkPopular("2015-08", 4, queryCounts, queries);
+        checkPopular("2015-08", Integer.MAX_VALUE, queryCounts, queries);
+        checkPopular("2015-08", 0, Collections.EMPTY_LIST, queries);
+        checkPopular("2015-08", -1, Collections.EMPTY_LIST, queries);
+
+        checkPopular("2015-08-02", 1, Collections.singletonList(new QueryCount("A", 1)), queries);
+        checkPopular("2015-08-03", 1, Collections.singletonList(new QueryCount("C", 3)), queries);
+        checkPopular("2015-08-04", 1, Collections.singletonList(new QueryCount("D", 4)), queries);
     }
+
 
     private void checkDistinct(String d, int expected, Repository queries) {
         TimeRange period = TimeRange.from(d);
