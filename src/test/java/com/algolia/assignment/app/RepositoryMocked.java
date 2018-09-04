@@ -13,8 +13,10 @@ import java.util.List;
 
 public final class RepositoryMocked {
 
+    private static final CharSequence TAB = "\t";
+
     private static Query createQuery(String dateTime, String text) {
-        return new Query(dateTime, text);
+        return QuerySource.TSV_FILE.feedRecordFromLine(String.join(TAB, dateTime, text));
     }
 
     private Repository feedQueries() {
