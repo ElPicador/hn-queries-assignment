@@ -65,7 +65,7 @@ public final class Repository {
 
     /**
      * Since we probably want to sort a small fraction of the result,
-     * it makes sense to use a priority queue.
+     * it makes sense to use a heap.
      */
     private List<QueryCount> sortTopK(int top, Map<String, MutableInt> countsByText) {
 
