@@ -30,19 +30,15 @@ public final class Query {
      */
     private final String text;
 
-    private Query(long date, String text) {
-        this.text = text;
-        this.date = date;
-    }
 
     /**
-     * Main constructor
      * @param dateTime a String representation conforming to the format specified in the assignment
      * @see DateConverter#FORMATTER
      * @param text the text of the query
      */
     Query(String dateTime, String text) {
-        this(DateConverter.toEpochSecond(dateTime), text);
+        this.text = text;
+        this.date = DateConverter.toEpochSecond(dateTime);
     }
 
     public static Comparator<Query> getDateComparator() {

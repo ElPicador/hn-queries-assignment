@@ -12,19 +12,22 @@ import java.util.stream.Stream;
  */
 public enum QuerySource {
 
-    TSV_FILE {
-        private static final String TAB = "\t";
+    TSV_FILE("\t") {
+    },
 
-        final Query feedRecordFromLine(String line) {
-            String[] cols = line.split(TAB);
-            String dateTime = cols[0];
-            String text = cols[1];
+    CSV_FILE(",") {
+    },
 
-            return feedRecordFromFields(dateTime, text);
-        }
+    TEST("unused") {
     };
 
-    public static Query feedRecordFromFields(String dateTime, String text) {
+    QuerySource(String separator) {
+        this.separator = separator;
+    }
+
+    private final String separator;
+
+    public Query feedRecordFromFields(String dateTime, String text) {
         // String.split uses new String(...).
         // The call to String.intern ensures that each String instance will be de-duplicated.
         // This shows as a hot spot in profiling.
@@ -41,5 +44,11 @@ public enum QuerySource {
         }
     }
 
-    abstract Query feedRecordFromLine(String line);
+    final Query feedRecordFromLine(String line) {
+        String[] cols = line.split(this.separator);
+        String dateTime = cols[0];
+        String text = cols[1];
+
+        return feedRecordFromFields(dateTime, text);
+    }
 }
