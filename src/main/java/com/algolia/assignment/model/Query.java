@@ -36,12 +36,12 @@ public final class Query {
     }
 
     /**
-     * Public constructor
+     * Main constructor
      * @param dateTime a String representation conforming to the format specified in the assignment
      * @see DateConverter#FORMATTER
      * @param text the text of the query
      */
-    public Query(String dateTime, String text) {
+    Query(String dateTime, String text) {
         this(DateConverter.toEpochSecond(dateTime), text);
     }
 

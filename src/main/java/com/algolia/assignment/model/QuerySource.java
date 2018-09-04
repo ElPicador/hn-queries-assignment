@@ -1,4 +1,4 @@
-package com.algolia.assignment.app;
+package com.algolia.assignment.model;
 
 import com.algolia.assignment.indexing.Repository;
 import com.algolia.assignment.model.Query;
@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 /**
  * This class initializes a queries repository from a file.
  */
-enum QuerySource {
+public enum QuerySource {
 
      TSV_FILE {
          private static final String TAB = "\t";
@@ -30,7 +30,7 @@ enum QuerySource {
          }};
 
 
-    Repository feedRepositoryFromFile(Path path) throws IOException {
+    public Repository feedRepositoryFromFile(Path path) throws IOException {
         try (Stream<String> lines = Files.lines(path)) {
             Stream<Query> queryStream = lines.map(this::feedRecordFromLine);
 

@@ -1,8 +1,9 @@
-package com.algolia.assignment.app;
+package com.algolia.assignment.model;
 
 import com.algolia.assignment.indexing.Repository;
 import com.algolia.assignment.model.Query;
 import com.algolia.assignment.model.QueryCount;
+import com.algolia.assignment.model.QuerySource;
 import com.algolia.assignment.model.TimeRange;
 import org.junit.Assert;
 

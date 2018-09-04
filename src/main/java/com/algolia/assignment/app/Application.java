@@ -1,6 +1,7 @@
 package com.algolia.assignment.app;
 
 import com.algolia.assignment.indexing.Repository;
+import com.algolia.assignment.model.QuerySource;
 import com.algolia.assignment.rest.RestServer;
 
 import java.io.IOException;
