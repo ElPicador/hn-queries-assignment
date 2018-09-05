@@ -18,7 +18,11 @@ public enum QuerySource {
     CSV_FILE(",") {
     },
 
-    TEST("unused") {
+    FROM_FIELDS("unused") {
+        @Override
+        Query feedRecordFromLine(String line) {
+            throw new UnsupportedOperationException("Cannot be used for this QuerySource.");
+        }
     };
 
     QuerySource(String separator) {
@@ -44,7 +48,7 @@ public enum QuerySource {
         }
     }
 
-    final Query feedRecordFromLine(String line) {
+    Query feedRecordFromLine(String line) {
         String[] cols = line.split(this.separator);
         String dateTime = cols[0];
         String text = cols[1];

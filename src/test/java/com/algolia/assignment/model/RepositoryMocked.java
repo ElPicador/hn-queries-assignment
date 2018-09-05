@@ -1,10 +1,6 @@
 package com.algolia.assignment.model;
 
 import com.algolia.assignment.indexing.Repository;
-import com.algolia.assignment.model.Query;
-import com.algolia.assignment.model.QueryCount;
-import com.algolia.assignment.model.QuerySource;
-import com.algolia.assignment.model.TimeRange;
 import org.junit.Assert;
 
 import java.time.format.DateTimeParseException;
@@ -17,7 +13,7 @@ public final class RepositoryMocked {
     private static final CharSequence TAB = "\t";
 
     private static Query createQuery(String dateTime, String text) {
-        return QuerySource.TEST.feedRecordFromFields( dateTime, text);
+        return QuerySource.FROM_FIELDS.feedRecordFromFields( dateTime, text);
     }
 
     private Repository feedQueries() {
