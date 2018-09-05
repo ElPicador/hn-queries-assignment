@@ -13,7 +13,7 @@ public final class RepositoryMocked {
     private static final CharSequence TAB = "\t";
 
     private static Query createQuery(String dateTime, String text) {
-        return QuerySource.FROM_FIELDS.feedRecordFromFields( dateTime, text);
+        return QuerySource.FROM_FIELDS__FOR_TEST.feedRecordFromFields( dateTime, text);
     }
 
     private Repository feedQueries() {

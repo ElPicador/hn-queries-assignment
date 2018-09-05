@@ -18,7 +18,7 @@ public enum QuerySource {
     CSV_FILE(",") {
     },
 
-    FROM_FIELDS("unused") {
+    FROM_FIELDS__FOR_TEST("unused") {
         @Override
         Query feedRecordFromLine(String line) {
             throw new UnsupportedOperationException("Cannot be used for this QuerySource.");
